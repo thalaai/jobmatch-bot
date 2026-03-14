@@ -1,5 +1,7 @@
 # jobmatch-bot
 
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Python](https://img.shields.io/badge/python-3.10+-blue)
 
 
 JobMatch Bot is an AI-assisted job intelligence pipeline that aggregates,

@@ -1,0 +1,181 @@
+# Example registry for open-source users.
+# Start with the known-good sources below, then enable experimental sources one by one.
+
+companies:
+  # Known-good sources
+  - name: Amazon
+    domain: amazon.jobs
+    canonical_careers_url: https://www.amazon.jobs/en/
+    ats_url: https://www.amazon.jobs/en/search.json
+    ats_type: amazon_json
+    health_score: 0.8
+  - name: Waymo
+    domain: careers.withwaymo.com
+    canonical_careers_url: https://careers.withwaymo.com/jobs/search
+    ats_url: https://boards-api.greenhouse.io/v1/boards/waymo/jobs
+    ats_type: greenhouse
+    health_score: 0.9
+  - name: Zoox
+    domain: zoox.com
+    canonical_careers_url: https://zoox.com/careers/
+    ats_url: https://api.lever.co/v0/postings/zoox
+    ats_type: lever
+    health_score: 0.75
+  - name: Uber Freight
+    domain: uberfreight.com
+    canonical_careers_url: https://www.uber.com/us/en/careers/list/
+    ats_url: https://boards-api.greenhouse.io/v1/boards/uberfreight/jobs
+    ats_type: greenhouse
+    health_score: 0.7
+
+  # Experimental sources: included by default, but may return no results or request errors
+  - name: Apple
+    domain: jobs.apple.com
+    canonical_careers_url: https://jobs.apple.com/en-us/search
+    ats_url: https://jobs.apple.com/en-us/details
+    ats_type: apple_jsonld
+    health_score: 0.45
+  - name: Adobe
+    domain: careers.adobe.com
+    canonical_careers_url: https://careers.adobe.com/us/en/c/engineering-and-product-jobs
+    ats_url: https://careers.adobe.com/us/en
+    ats_type: workday
+    health_score: 0.55
+  - name: NVIDIA
+    domain: nvidia.wd5.myworkdayjobs.com
+    canonical_careers_url: https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite
+    ats_url: https://nvidia.wd5.myworkdayjobs.com/wday/cxs/nvidia/NVIDIAExternalCareerSite/jobs
+    ats_type: workday
+    health_score: 0.7
+  - name: Intel
+    domain: intel.wd1.myworkdayjobs.com
+    canonical_careers_url: https://intel.wd1.myworkdayjobs.com/External
+    ats_url: https://intel.wd1.myworkdayjobs.com/External
+    ats_type: workday
+    health_score: 0.6
+  - name: Microsoft
+    domain: careers.microsoft.com
+    canonical_careers_url: https://careers.microsoft.com/
+    ats_url: https://gcsservices.careers.microsoft.com/search/api/v1/search
+    ats_type: microsoft_search
+    health_score: 0.65
+  - name: Netflix
+    domain: explore.jobs.netflix.net
+    canonical_careers_url: https://explore.jobs.netflix.net/careers
+    ats_url: https://explore.jobs.netflix.net/careers
+    ats_type: eightfold
+    health_score: 0.5
+
+  # Disabled by default because they require company-specific request payloads
+  - name: Meta
+    domain: metacareers.com
+    canonical_careers_url: https://www.metacareers.com/jobsearch
+    ats_url: https://www.metacareers.com/graphql
+    ats_type: meta_graphql
+    health_score: 0.3
+
+sources:
+  # Known-good sources
+  - company: Amazon
+    source_name: amazon_search_json
+    source_type: amazon_json
+    entrypoint: https://www.amazon.jobs/en/search.json
+    metadata:
+      page_size: 100
+      queries:
+        - technical program manager
+        - program manager
+        - engineering program manager
+
+  - company: Waymo
+    source_name: waymo_greenhouse
+    source_type: greenhouse
+    entrypoint: https://boards-api.greenhouse.io/v1/boards/waymo/jobs
+    metadata:
+      slug: waymo
+      content: true
+
+  - company: Zoox
+    source_name: zoox_lever
+    source_type: lever
+    entrypoint: https://api.lever.co/v0/postings/zoox?mode=json
+    metadata:
+      slug: zoox
+
+  - company: Uber Freight
+    source_name: uberfreight_greenhouse
+    source_type: greenhouse
+    entrypoint: https://boards-api.greenhouse.io/v1/boards/uberfreight/jobs
+    metadata:
+      slug: uberfreight
+      content: true
+
+  # Experimental sources
+  - company: Apple
+    source_name: apple_jsonld_detail
+    source_type: apple_jsonld
+    entrypoint: https://jobs.apple.com/en-us/search?location=united-states-USA
+    metadata:
+      search_urls:
+        - https://jobs.apple.com/en-us/search?location=united-states-USA
+      max_detail_pages: 25
+
+  - company: Adobe
+    source_name: adobe_workday
+    source_type: workday
+    entrypoint: https://careers.adobe.com/us/en
+    metadata: {}
+
+  - company: NVIDIA
+    source_name: nvidia_workday_api
+    source_type: workday
+    entrypoint: https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite
+    metadata:
+      api_url: https://nvidia.wd5.myworkdayjobs.com/wday/cxs/nvidia/NVIDIAExternalCareerSite/jobs
+
+  - company: Intel
+    source_name: intel_workday
+    source_type: workday
+    entrypoint: https://intel.wd1.myworkdayjobs.com/External
+    metadata: {}
+
+  - company: Microsoft
+    source_name: microsoft_search_api
+    source_type: microsoft_search
+    entrypoint: https://gcsservices.careers.microsoft.com/search/api/v1/search
+    metadata:
+      location: United States
+      page_size: 20
+      queries:
+        - technical program manager
+        - program manager
+        - engineering program manager
+        - platform program manager
+      fallback_urls:
+        - https://careers.microsoft.com/v2/global/en/locations
+        - https://careers.microsoft.com/v2/global/en/professions
+
+  - company: Netflix
+    source_name: netflix_eightfold
+    source_type: eightfold
+    entrypoint: https://explore.jobs.netflix.net/careers
+    metadata:
+      domain: netflix.com
+      queries:
+        - technical program manager
+        - program manager
+        - engineering program manager
+        - platform program manager
+
+  # Disabled by default
+  - company: Meta
+    source_name: meta_graphql
+    source_type: meta_graphql
+    entrypoint: https://www.metacareers.com/graphql
+    metadata:
+      doc_id: ""
+      variables: {}
+      queries:
+        - technical program manager
+        - program manager
+    enabled: false

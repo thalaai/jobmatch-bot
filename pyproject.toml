@@ -1,0 +1,49 @@
+[project]
+name = "job-intel"
+version = "0.2.0"
+description = "ATS-first job discovery and ranking engine for structured career sources"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+  {name = "Open Source Contributors"},
+]
+keywords = ["jobs", "ats", "career-search", "greenhouse", "lever", "workday", "ranking"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Intended Audience :: Developers",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+  "selectolax",
+  "pydantic",
+  "loguru",
+  "httpx",
+  "extruct",
+  "rapidfuzz",
+  "requests",
+  "beautifulsoup4",
+  "lxml",
+  "pandas",
+  "scikit-learn",
+  "sentence-transformers",
+  "pyyaml",
+  "tqdm",
+  "playwright",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["job_intel"]
+
+[project.scripts]
+job-intel = "job_intel.cli:main"

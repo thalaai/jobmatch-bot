@@ -258,6 +258,26 @@ This is the primary debugging surface when a company returns no jobs.
 - Historical crawl tracking
 - Hosted version later
 
+##System Architecture
+
+Companies → Adapters → Normalization → Dedupe → Scoring → Ranked Jobs
+
+CLI
+ ↓
+Pipeline
+ ↓
+Adapters → Data Sources
+ ↓
+Normalization
+ ↓
+Deduplication
+ ↓
+Scoring Engine
+ ↓
+Ranked Job Results
+
+
+
 ## Contributing
 See `CONTRIBUTING.md` for how to add adapters, sources, and tests.
 

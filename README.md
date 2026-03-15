@@ -1,16 +1,38 @@
-# jobmatch-bot
+# JobMatch Bot
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Python](https://img.shields.io/badge/python-3.10+-blue)
 
+JobMatch Bot is an AI-assisted job intelligence pipeline that aggregates, normalizes, deduplicates, and ranks jobs from multiple ATS and company career systems such as Workday, Greenhouse, Lever, and Eightfold.
 
-JobMatch Bot is an AI-assisted job intelligence pipeline that aggregates,
-normalizes, deduplicates, and ranks jobs from multiple ATS and company
-career systems such as Workday, Greenhouse, Lever, and Eightfold.
+The system focuses on **recall-first ingestion followed by ranking** to help candidates discover relevant roles that traditional job portals often hide.
 
-The system focuses on **recall-first ingestion followed by ranking**
-to help candidates discover relevant roles that traditional job
-portals often hide.
+## Features
+
+- Multi-source ATS adapters (Amazon, Greenhouse, Lever, Workday, Apple, Microsoft)
+- Recall-first job ingestion pipeline
+- Job normalization and deduplication
+- Resume-aware scoring signals
+- Diagnostics for debugging missing sources
+- CSV and Markdown outputs for review
+
+## System Architecture
+
+Companies → Adapters → Normalization → Dedupe → Scoring → Ranked Jobs
+
+CLI
+ ↓
+Pipeline
+ ↓
+Adapters → Data Sources
+ ↓
+Normalization
+ ↓
+Deduplication
+ ↓
+Scoring Engine
+ ↓
+Ranked Job Results
 
 
 ## Setup
@@ -75,6 +97,7 @@ cp job_intel_sources.example.yaml job_intel_sources.yaml
 ```
 
 2. Add your resume as `resume.txt` in the repo root.
+   You can start from the example format:cp examples/resume.txt resume.txt
 
 Example:
 
@@ -257,25 +280,6 @@ This is the primary debugging surface when a company returns no jobs.
 - Resume-aware scoring
 - Historical crawl tracking
 - Hosted version later
-
-##System Architecture
-
-Companies → Adapters → Normalization → Dedupe → Scoring → Ranked Jobs
-
-CLI
- ↓
-Pipeline
- ↓
-Adapters → Data Sources
- ↓
-Normalization
- ↓
-Deduplication
- ↓
-Scoring Engine
- ↓
-Ranked Job Results
-
 
 
 ## Contributing

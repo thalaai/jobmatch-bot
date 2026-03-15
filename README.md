@@ -21,17 +21,17 @@ The system focuses on **recall-first ingestion followed by ranking** to help can
 Companies → Adapters → Normalization → Dedupe → Scoring → Ranked Jobs
 
 CLI
- ↓
+ →
 Pipeline
- ↓
+ →
 Adapters → Data Sources
- ↓
+ →
 Normalization
- ↓
+→
 Deduplication
- ↓
+→
 Scoring Engine
- ↓
+→
 Ranked Job Results
 
 
@@ -293,6 +293,33 @@ Before publishing a release:
 - confirm `out/diagnostics.csv` contains at least one `working` source
 - make sure no local outputs, resumes, caches, or temporary directories are present
 - replace the placeholder clone URL in `README.md`
+
+  
+## Help Wanted
+
+We welcome contributions.
+
+Some good starter issues:
+
+- SmartRecruiters adapter
+- Ashby ATS adapter
+- Location normalization improvements
+- Diagnostics enhancements
+
+Check the Issues tab for tasks labeled `good-first-issue`.
+
+## Why JobMatch Bot
+
+Traditional job portals often hide relevant roles due to strict keyword filtering, ranking bias, and incomplete indexing of company career sites.
+
+JobMatch Bot takes a different approach:
+
+- **Recall-first ingestion** to collect as many relevant roles as possible
+- **Normalization and deduplication** across multiple ATS systems
+- **Candidate-aware ranking** to surface the best matches
+
+The goal is to help candidates discover opportunities that conventional job portals frequently miss.
+
 
 ## License
 MIT (see `LICENSE`).
